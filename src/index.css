@@ -11,14 +11,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 .leaflet-container {
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
-/* Responsive styling */
+/* Verbeterde responsieve styling */
 @media screen and (max-width: 768px) {
   .mobile-hidden {
     display: none !important;
@@ -27,11 +34,23 @@ body {
   .mobile-small-text {
     font-size: 0.9rem !important;
   }
+
+  .leaflet-control-zoom {
+    margin-top: 60px !important;
+  }
+
+  .leaflet-control-attribution {
+    font-size: 8px !important;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .mobile-extra-small-text {
     font-size: 0.8rem !important;
+  }
+
+  .leaflet-control-zoom {
+    margin-top: 80px !important;
   }
 }
 
@@ -39,5 +58,42 @@ body {
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .tablet-adjusted {
     width: 200px !important;
+  }
+}
+
+/* Verbeterde kaart controls */
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background-color: white !important;
+  color: #333 !important;
+  width: 30px !important;
+  height: 30px !important;
+  line-height: 30px !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  border: none !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+  background-color: #f4f4f4 !important;
+  color: #000 !important;
+}
+
+/* Verbeterde touch interactie */
+@media (hover: none) {
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 22px !important;
   }
 } 

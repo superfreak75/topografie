@@ -869,350 +869,64 @@ export default function App() {
   }
 
   return (
-    <Box sx={{ width: '100vw', height: '100vh', position: 'relative' }}>
+    <Box sx={{ 
+      width: '100vw', 
+      height: '100vh', 
+      position: 'relative',
+      overflow: 'hidden',
+      '@media (max-width: 768px)': {
+        display: 'flex',
+        flexDirection: 'column'
+      }
+    }}>
       <GlobalStyles />
       
-      {/* Reset knop */}
-      <Button
-        variant="contained"
-        startIcon={<DeleteIcon />}
-        onClick={handleReset}
-        sx={{
-          position: 'absolute',
-          bottom: { xs: 10, sm: 20 },
-          left: { xs: 10, sm: 20 },
-          zIndex: 1000,
-          backgroundColor: '#ff5252',
-          '&:hover': {
-            backgroundColor: '#ff1744',
-          },
-          fontFamily: '"Comic Sans MS", cursive, sans-serif',
-          borderRadius: 3,
-          padding: { xs: '8px 16px', sm: '10px 20px' },
-          boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-          fontSize: { xs: '0.9rem', sm: '1rem' }
-        }}
-      >
-        Begin Opnieuw! 🔄
-      </Button>
-
-      {/* Score teller */}
-      <Paper
-        elevation={3}
-        sx={{
-          position: 'absolute',
-          top: { xs: 10, sm: 20 },
-          right: { xs: 10, sm: 20 },
-          zIndex: 1000,
-          padding: { xs: 1, sm: 2 },
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 1,
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          width: { xs: '90%', sm: 250, md: 250 },
-          maxWidth: '95vw',
-          borderRadius: 4,
-          border: '3px solid #4CAF50',
-          height: 'auto',
-          minHeight: { xs: 150, sm: 180 },
-          marginBottom: 2,
-          '@media (max-width: 768px)': {
-            right: '50%',
-            transform: 'translateX(50%)'
-          }
-        }}
-      >
-        <Typography 
-          variant="h5" 
-          align="center" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 'bold',
-            color: '#2196F3',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            fontSize: { xs: '1.2rem', sm: '1.5rem' }
-          }}
-        >
-          🎯 Jouw Score! 🎯
-        </Typography>
-
-        <Box sx={{ 
-          display: 'flex', 
-          justifyContent: 'space-around',
-          backgroundColor: '#E8F5E9',
-          padding: 1,
-          borderRadius: 2,
-          border: '2px solid #81C784'
-        }}>
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography sx={{ 
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: '#4CAF50',
-              fontFamily: '"Comic Sans MS", cursive, sans-serif'
-            }}>
-              {locations.filter(loc => loc.status === 'correct').length}
-            </Typography>
-            <Typography sx={{ 
-              fontSize: '16px',
-              color: '#4CAF50',
-              fontFamily: '"Comic Sans MS", cursive, sans-serif'
-            }}>
-              🌟 Goed! 🌟
-            </Typography>
-          </Box>
-        </Box>
-
-        <Box sx={{ 
-          display: 'flex', 
-          justifyContent: 'space-around',
-          backgroundColor: '#FFEBEE',
-          padding: 1,
-          borderRadius: 2,
-          border: '2px solid #E57373'
-        }}>
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography sx={{ 
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: '#f44336',
-              fontFamily: '"Comic Sans MS", cursive, sans-serif'
-            }}>
-              {locations.filter(loc => loc.status === 'incorrect').length}
-            </Typography>
-            <Typography sx={{ 
-              fontSize: '16px',
-              color: '#f44336',
-              fontFamily: '"Comic Sans MS", cursive, sans-serif'
-            }}>
-              😮 Oeps! 😮
-            </Typography>
-          </Box>
-        </Box>
-
-        {/* Motiverende boodschap */}
-        <Typography 
-          align="center" 
-          sx={{ 
-            fontSize: '14px',
-            color: '#666',
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            marginTop: 1
-          }}
-        >
-          {locations.filter(loc => loc.status === 'correct').length === 0 ? "Je kunt het! 💪" :
-           locations.filter(loc => loc.status === 'correct').length < 5 ? "Goed bezig! 🎈" :
-           locations.filter(loc => loc.status === 'correct').length < 10 ? "Super goed! 🌟" :
-           "Geweldig gedaan! 🏆"}
-        </Typography>
-      </Paper>
-
-      {/* Categorieën Menu */}
-      <Paper
-        elevation={3}
-        sx={{
-          position: 'absolute',
-          top: { xs: 200, sm: 320 },
-          right: { xs: 10, sm: 20 },
-          zIndex: 1000,
-          padding: { xs: 1, sm: 2 },
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          width: { xs: '90%', sm: 250, md: 250 },
-          maxWidth: '95vw',
-          borderRadius: 4,
-          border: '3px solid #2196F3',
-          height: 'auto',
-          minHeight: { xs: 250, sm: 280 },
-          marginBottom: 2,
-          '@media (max-width: 768px)': {
-            right: '50%',
-            transform: 'translateX(50%)'
-          }
-        }}
-      >
-        <Typography 
-          variant="h5" 
-          align="center" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 'bold',
-            color: '#2196F3',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            fontSize: { xs: '1.2rem', sm: '1.5rem' }
-          }}
-        >
-          🗺️ Categorieën 🗺️
-        </Typography>
-
-        <Button
-          variant="contained"
-          onClick={() => handleCategoryChange('cities')}
-          sx={{
-            backgroundColor: selectedCategory === 'cities' ? '#45a049' : '#4CAF50',
-            '&:hover': { backgroundColor: '#45a049' },
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            borderRadius: 3,
-            textTransform: 'none',
-            fontSize: '1.1rem',
-            padding: '10px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-          }}
-        >
-          🏙️ Steden
-        </Button>
-
-        <Button
-          variant="contained"
-          onClick={() => handleCategoryChange('rivers')}
-          sx={{
-            backgroundColor: selectedCategory === 'rivers' ? '#1976D2' : '#2196F3',
-            '&:hover': { backgroundColor: '#1976D2' },
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            borderRadius: 3,
-            textTransform: 'none',
-            fontSize: '1.1rem',
-            padding: '10px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-          }}
-        >
-          💧 Rivieren
-        </Button>
-
-        <Button
-          variant="contained"
-          onClick={() => handleCategoryChange('regions')}
-          sx={{
-            backgroundColor: selectedCategory === 'regions' ? '#7B1FA2' : '#9C27B0',
-            '&:hover': { backgroundColor: '#7B1FA2' },
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            borderRadius: 3,
-            textTransform: 'none',
-            fontSize: '1.1rem',
-            padding: '10px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-          }}
-        >
-          ⛰️ Gebieden/Gebergten
-        </Button>
-
-        <Typography 
-          align="center" 
-          sx={{ 
-            fontSize: '14px',
-            color: '#666',
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            marginTop: 1,
-            fontStyle: 'italic'
-          }}
-        >
-          Kies een categorie om te oefenen! ✨
-        </Typography>
-
-        <Typography 
-          align="center" 
-          sx={{ 
-            fontSize: '14px',
-            color: '#FF5722',
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            marginTop: 1,
-            padding: '8px',
-            backgroundColor: '#FFF3E0',
-            borderRadius: '8px',
-            border: '2px dashed #FF5722'
-          }}
-        >
-          Let op! Als je op een knop klikt, verdwijnen alle namen. 
-          Dan moet je zelf de juiste namen invullen door op de markers te klikken! 🎯
-        </Typography>
-      </Paper>
-
-      {/* Overhoring Box */}
-      <Paper
-        elevation={3}
-        sx={{
-          position: 'absolute',
-          top: { xs: 480, sm: 850 },
-          right: { xs: 10, sm: 20 },
-          zIndex: 1000,
-          padding: { xs: 1, sm: 2 },
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          width: { xs: '90%', sm: 250, md: 250 },
-          maxWidth: '95vw',
-          borderRadius: 4,
-          border: '3px solid #FF9800',
-          height: 'auto',
-          minHeight: { xs: 140, sm: 160 },
-          '@media (max-width: 768px)': {
-            right: '50%',
-            transform: 'translateX(50%)'
-          }
-        }}
-      >
-        <Typography 
-          variant="h5" 
-          align="center" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 'bold',
-            color: '#FF9800',
-            textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            fontSize: { xs: '1.2rem', sm: '1.5rem' }
-          }}
-        >
-          📝 Overhoring 📝
-        </Typography>
-
-        <Button
-          variant="contained"
-          onClick={startExam}
-          sx={{
-            backgroundColor: '#FF9800',
-            '&:hover': { backgroundColor: '#F57C00' },
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            borderRadius: 3,
-            textTransform: 'none',
-            fontSize: '1.1rem',
-            padding: '10px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-          }}
-        >
-          🎯 Start Overhoring
-        </Button>
-
-        <Typography 
-          align="center" 
-          sx={{ 
-            fontSize: '14px',
-            color: '#666',
-            fontFamily: '"Comic Sans MS", cursive, sans-serif',
-            marginTop: 1,
-            fontStyle: 'italic'
-          }}
-        >
-          Test je kennis! 🌟
-        </Typography>
-      </Paper>
-
       <MapContainer
-        center={[48.5, 7.0]} // Meer centraal in Europa
-        zoom={6} // Dichterbij ingezoomd
-        style={{ width: '100%', height: '100%' }}
-        preferCanvas={true}
-        zoomControl={true}
+        center={[48.5, 7.0]}
+        zoom={6}
+        style={{ 
+          width: '100%', 
+          height: '100%',
+          zIndex: 1
+        }}
+        zoomControl={false}
+        attributionControl={false}
       >
         <TileLayer
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
+        
+        {/* Voeg zoom controls toe op een betere positie voor mobiel */}
+        <div className="leaflet-control-container">
+          <div className="leaflet-top leaflet-left" style={{ top: '80px' }}>
+            <div className="leaflet-control-zoom">
+              <button 
+                className="leaflet-control-zoom-in" 
+                title="Zoom in"
+                onClick={() => {
+                  const mapElement = document.querySelector('.leaflet-container');
+                  if (mapElement && 'leaflet' in mapElement) {
+                    const map = (mapElement as any)._leaflet_map;
+                    if (map) map.zoomIn();
+                  }
+                }}
+              >+</button>
+              <button 
+                className="leaflet-control-zoom-out" 
+                title="Zoom out"
+                onClick={() => {
+                  const mapElement = document.querySelector('.leaflet-container');
+                  if (mapElement && 'leaflet' in mapElement) {
+                    const map = (mapElement as any)._leaflet_map;
+                    if (map) map.zoomOut();
+                  }
+                }}
+              >−</button>
+            </div>
+          </div>
+        </div>
+
         {locations.map((location) => {
           if (location.type === 'city') {
             return (
@@ -1720,6 +1434,332 @@ export default function App() {
           }
         })}
       </MapContainer>
+
+      {/* Score teller */}
+      <Paper
+        elevation={3}
+        sx={{
+          position: 'absolute',
+          top: { xs: 10, sm: 20 },
+          right: { xs: '50%', sm: 20 },
+          transform: { xs: 'translateX(50%)', sm: 'none' },
+          zIndex: 1000,
+          padding: { xs: 1, sm: 2 },
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 1,
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          width: { xs: '90%', sm: 250, md: 250 },
+          maxWidth: '95vw',
+          borderRadius: 4,
+          border: '3px solid #4CAF50',
+          height: 'auto',
+          minHeight: { xs: 120, sm: 180 },
+          marginBottom: 2,
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+        }}
+      >
+        <Typography 
+          variant="h5" 
+          align="center" 
+          gutterBottom 
+          sx={{ 
+            fontWeight: 'bold',
+            color: '#2196F3',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            fontSize: { xs: '1.2rem', sm: '1.5rem' }
+          }}
+        >
+          🎯 Jouw Score! 🎯
+        </Typography>
+
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-around',
+          backgroundColor: '#E8F5E9',
+          padding: 1,
+          borderRadius: 2,
+          border: '2px solid #81C784'
+        }}>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography sx={{ 
+              fontSize: '24px',
+              fontWeight: 'bold',
+              color: '#4CAF50',
+              fontFamily: '"Comic Sans MS", cursive, sans-serif'
+            }}>
+              {locations.filter(loc => loc.status === 'correct').length}
+            </Typography>
+            <Typography sx={{ 
+              fontSize: '16px',
+              color: '#4CAF50',
+              fontFamily: '"Comic Sans MS", cursive, sans-serif'
+            }}>
+              🌟 Goed! 🌟
+            </Typography>
+          </Box>
+        </Box>
+
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-around',
+          backgroundColor: '#FFEBEE',
+          padding: 1,
+          borderRadius: 2,
+          border: '2px solid #E57373'
+        }}>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography sx={{ 
+              fontSize: '24px',
+              fontWeight: 'bold',
+              color: '#f44336',
+              fontFamily: '"Comic Sans MS", cursive, sans-serif'
+            }}>
+              {locations.filter(loc => loc.status === 'incorrect').length}
+            </Typography>
+            <Typography sx={{ 
+              fontSize: '16px',
+              color: '#f44336',
+              fontFamily: '"Comic Sans MS", cursive, sans-serif'
+            }}>
+              😮 Oeps! 😮
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Motiverende boodschap */}
+        <Typography 
+          align="center" 
+          sx={{ 
+            fontSize: '14px',
+            color: '#666',
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            marginTop: 1
+          }}
+        >
+          {locations.filter(loc => loc.status === 'correct').length === 0 ? "Je kunt het! 💪" :
+           locations.filter(loc => loc.status === 'correct').length < 5 ? "Goed bezig! 🎈" :
+           locations.filter(loc => loc.status === 'correct').length < 10 ? "Super goed! 🌟" :
+           "Geweldig gedaan! 🏆"}
+        </Typography>
+      </Paper>
+
+      {/* Categorieën Menu */}
+      <Paper
+        elevation={3}
+        sx={{
+          position: 'absolute',
+          top: { xs: 150, sm: 320 },
+          right: { xs: '50%', sm: 20 },
+          transform: { xs: 'translateX(50%)', sm: 'none' },
+          zIndex: 1000,
+          padding: { xs: 1, sm: 2 },
+          display: 'flex',
+          flexDirection: 'column',
+          gap: { xs: 1, sm: 2 },
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          width: { xs: '90%', sm: 250, md: 250 },
+          maxWidth: '95vw',
+          borderRadius: 4,
+          border: '3px solid #2196F3',
+          height: 'auto',
+          minHeight: { xs: 200, sm: 280 },
+          marginBottom: 2,
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+        }}
+      >
+        <Typography 
+          variant="h5" 
+          align="center" 
+          gutterBottom 
+          sx={{ 
+            fontWeight: 'bold',
+            color: '#2196F3',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            fontSize: { xs: '1.2rem', sm: '1.5rem' }
+          }}
+        >
+          🗺️ Categorieën 🗺️
+        </Typography>
+
+        <Button
+          variant="contained"
+          onClick={() => handleCategoryChange('cities')}
+          sx={{
+            backgroundColor: selectedCategory === 'cities' ? '#45a049' : '#4CAF50',
+            '&:hover': { backgroundColor: '#45a049' },
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            borderRadius: 3,
+            textTransform: 'none',
+            fontSize: '1.1rem',
+            padding: '10px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}
+        >
+          🏙️ Steden
+        </Button>
+
+        <Button
+          variant="contained"
+          onClick={() => handleCategoryChange('rivers')}
+          sx={{
+            backgroundColor: selectedCategory === 'rivers' ? '#1976D2' : '#2196F3',
+            '&:hover': { backgroundColor: '#1976D2' },
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            borderRadius: 3,
+            textTransform: 'none',
+            fontSize: '1.1rem',
+            padding: '10px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}
+        >
+          💧 Rivieren
+        </Button>
+
+        <Button
+          variant="contained"
+          onClick={() => handleCategoryChange('regions')}
+          sx={{
+            backgroundColor: selectedCategory === 'regions' ? '#7B1FA2' : '#9C27B0',
+            '&:hover': { backgroundColor: '#7B1FA2' },
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            borderRadius: 3,
+            textTransform: 'none',
+            fontSize: '1.1rem',
+            padding: '10px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}
+        >
+          ⛰️ Gebieden/Gebergten
+        </Button>
+
+        <Typography 
+          align="center" 
+          sx={{ 
+            fontSize: '14px',
+            color: '#666',
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            marginTop: 1,
+            fontStyle: 'italic'
+          }}
+        >
+          Kies een categorie om te oefenen! ✨
+        </Typography>
+
+        <Typography 
+          align="center" 
+          sx={{ 
+            fontSize: '14px',
+            color: '#FF5722',
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            marginTop: 1,
+            padding: '8px',
+            backgroundColor: '#FFF3E0',
+            borderRadius: '8px',
+            border: '2px dashed #FF5722'
+          }}
+        >
+          Let op! Als je op een knop klikt, verdwijnen alle namen. 
+          Dan moet je zelf de juiste namen invullen door op de markers te klikken! 🎯
+        </Typography>
+      </Paper>
+
+      {/* Overhoring Box */}
+      <Paper
+        elevation={3}
+        sx={{
+          position: 'absolute',
+          top: { xs: 370, sm: 850 },
+          right: { xs: '50%', sm: 20 },
+          transform: { xs: 'translateX(50%)', sm: 'none' },
+          zIndex: 1000,
+          padding: { xs: 1, sm: 2 },
+          display: 'flex',
+          flexDirection: 'column',
+          gap: { xs: 1, sm: 2 },
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          width: { xs: '90%', sm: 250, md: 250 },
+          maxWidth: '95vw',
+          borderRadius: 4,
+          border: '3px solid #FF9800',
+          height: 'auto',
+          minHeight: { xs: 120, sm: 160 },
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+        }}
+      >
+        <Typography 
+          variant="h5" 
+          align="center" 
+          gutterBottom 
+          sx={{ 
+            fontWeight: 'bold',
+            color: '#FF9800',
+            textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            fontSize: { xs: '1.2rem', sm: '1.5rem' }
+          }}
+        >
+          📝 Overhoring 📝
+        </Typography>
+
+        <Button
+          variant="contained"
+          onClick={startExam}
+          sx={{
+            backgroundColor: '#FF9800',
+            '&:hover': { backgroundColor: '#F57C00' },
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            borderRadius: 3,
+            textTransform: 'none',
+            fontSize: '1.1rem',
+            padding: '10px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}
+        >
+          🎯 Start Overhoring
+        </Button>
+
+        <Typography 
+          align="center" 
+          sx={{ 
+            fontSize: '14px',
+            color: '#666',
+            fontFamily: '"Comic Sans MS", cursive, sans-serif',
+            marginTop: 1,
+            fontStyle: 'italic'
+          }}
+        >
+          Test je kennis! 🌟
+        </Typography>
+      </Paper>
+
+      {/* Reset knop */}
+      <Button
+        variant="contained"
+        startIcon={<DeleteIcon />}
+        onClick={handleReset}
+        sx={{
+          position: 'absolute',
+          bottom: { xs: 20, sm: 20 },
+          left: { xs: '50%', sm: 20 },
+          transform: { xs: 'translateX(-50%)', sm: 'none' },
+          zIndex: 1000,
+          backgroundColor: '#ff5252',
+          '&:hover': {
+            backgroundColor: '#ff1744',
+          },
+          fontFamily: '"Comic Sans MS", cursive, sans-serif',
+          borderRadius: 3,
+          padding: { xs: '8px 16px', sm: '10px 20px' },
+          boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+          fontSize: { xs: '0.9rem', sm: '1rem' },
+          whiteSpace: 'nowrap'
+        }}
+      >
+        Begin Opnieuw! 🔄
+      </Button>
 
       {showError && (
         <CrossSVG />
